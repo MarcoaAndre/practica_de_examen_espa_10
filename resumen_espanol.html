@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen Español — Examen II Período</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:     #1a1a2e;
+    --paper:   #f7f4ee;
+    --accent1: #7b4fcf;   /* violeta — el verbo */
+    --accent2: #c84b31;   /* rojo griego — Edipo */
+    --accent3: #2e7d6b;   /* verde — ejemplos */
+    --gold:    #e8a020;
+    --muted:   #6b6880;
+    --card:    #ffffff;
+    --rule:    #d6d0c8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: var(--ink);
+    color: #fff;
+    padding: 60px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 110%, #4b2fa030 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid #ffffff40;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: #ffffffaa;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.2rem, 6vw, 3.6rem);
+    font-weight: 900;
+    line-height: 1.08;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    color: #ffffffbb;
+    max-width: 520px;
+    margin: 0 auto 28px;
+    font-size: 14px;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    color: #ffffff70;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 5px; }
+
+  /* ── NAV PILLS ───────────────────────────────────── */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid #ffffff15;
+    padding: 10px 24px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-pill {
+    white-space: nowrap;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    cursor: pointer;
+    border: 1px solid transparent;
+    color: #ffffff80;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    background: var(--accent1);
+    color: #fff;
+    border-color: var(--accent1);
+  }
+  .nav-pill.greek:hover, .nav-pill.greek.active { background: var(--accent2); border-color: var(--accent2); }
+  .nav-pill.prac:hover, .nav-pill.prac.active { background: var(--accent3); border-color: var(--accent3); }
+
+  /* ── LAYOUT ──────────────────────────────────────── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── SECTION HEADERS ─────────────────────────────── */
+  .section-header {
+    margin: 52px 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-icon {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .icon-purple { background: #7b4fcf20; }
+  .icon-red    { background: #c84b3120; }
+  .icon-green  { background: #2e7d6b20; }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .section-title small {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  /* ── CARDS ───────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    border: 1px solid var(--rule);
+    padding: 22px 24px;
+    margin-bottom: 16px;
+  }
+  .card-title {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    display: inline-block; flex-shrink: 0;
+  }
+  .dot-purple { background: var(--accent1); }
+  .dot-red    { background: var(--accent2); }
+  .dot-green  { background: var(--accent3); }
+  .dot-gold   { background: var(--gold); }
+
+  /* ── DEFINITION ROW ──────────────────────────────── */
+  .def { font-size: 14px; color: #3a3850; margin-bottom: 12px; }
+
+  /* ── TABLA ACCIDENTES ────────────────────────────── */
+  .acc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .acc-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--rule);
+  }
+  .acc-card.purple { border-top: 3px solid var(--accent1); }
+  .acc-card.red    { border-top: 3px solid var(--accent2); }
+  .acc-card.green  { border-top: 3px solid var(--accent3); }
+  .acc-card.gold   { border-top: 3px solid var(--gold); }
+  .acc-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .acc-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .acc-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+  /* ── TABLE ───────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  th {
+    background: var(--ink);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+  th:first-child { border-radius: 6px 0 0 6px; }
+  th:last-child  { border-radius: 0 6px 6px 0; }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: #faf9f7; }
+  td strong { color: var(--accent1); }
+
+  /* ── EXAMPLE PILLS ───────────────────────────────── */
+  .examples-row {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+  }
+  .ex-pill {
+    background: #2e7d6b10;
+    border: 1px solid #2e7d6b30;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--accent3);
+    font-style: italic;
+  }
+  .ex-pill .tag {
+    font-style: normal;
+    font-weight: 700;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-left: 4px;
+  }
+
+  /* ── MODO CARDS ──────────────────────────────────── */
+  .modo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media(max-width: 520px){ .modo-grid { grid-template-columns: 1fr; } }
+  .modo-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+  .modo-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .modo-card.ind::before { background: var(--accent1); }
+  .modo-card.sub::before { background: var(--gold); }
+  .modo-card.imp::before { background: var(--accent2); }
+  .modo-name {
+    font-family: 'Fraunces', serif;
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .modo-def { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+  .modo-ex  { font-size: 12px; font-style: italic; color: var(--accent3); }
+
+  /* ── FORMAS NO PERSONALES ────────────────────────── */
+  .fnp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media(max-width: 520px){ .fnp-grid { grid-template-columns: 1fr; } }
+  .fnp-card {
+    background: linear-gradient(135deg, #7b4fcf08, #7b4fcf18);
+    border: 1px solid #7b4fcf25;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+  .fnp-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--accent1);
+    margin-bottom: 6px;
+  }
+  .fnp-term {
+    background: var(--accent1);
+    color: #fff;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .fnp-desc { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .fnp-ex   { font-size: 12px; color: var(--accent3); font-style: italic; }
+
+  /* ── PERSONA TABLE ───────────────────────────────── */
+  .persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media(max-width: 520px){ .persona-grid { grid-template-columns: 1fr; } }
+  .persona-card {
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid var(--rule);
+  }
+  .persona-card.p1 { border-top: 3px solid var(--accent1); }
+  .persona-card.p2 { border-top: 3px solid var(--gold); }
+  .persona-card.p3 { border-top: 3px solid var(--accent2); }
+  .persona-num { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+  .persona-name { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; margin: 4px 0; }
+  .persona-prons { font-size: 12px; color: #444; }
+
+  /* ── DIVIDER ──────────────────────────────────────── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+
+  /* ── EDIPO SECTION ───────────────────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 20px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 6px; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent2), transparent);
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -24px; top: 5px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent2);
+    border: 2px solid var(--paper);
+  }
+  .tl-title {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 3px;
+  }
+  .tl-text { font-size: 13px; color: #3a3850; line-height: 1.5; }
+
+  /* ── PERSONAJES ──────────────────────────────────── */
+  .personaje-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .p-avatar {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: #c84b3115;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .p-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+  .p-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+  .badge-main { background: #c84b3120; color: var(--accent2); }
+  .badge-sec  { background: #e8a02015; color: #9a6a00; }
+  .badge-ref  { background: #6b688015; color: var(--muted); }
+  .p-desc { font-size: 12.5px; color: #444; line-height: 1.5; }
+
+  /* ── TEMAS ────────────────────────────────────────── */
+  .tema-main {
+    background: linear-gradient(135deg, #c84b3108, #c84b3118);
+    border: 1px solid #c84b3130;
+    border-left: 4px solid var(--accent2);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .subtemas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media(max-width: 500px){ .subtemas-grid { grid-template-columns: 1fr; } }
+  .subtema-card {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .subtema-icon { font-size: 20px; margin-bottom: 6px; }
+  .subtema-title { font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+  .subtema-text  { font-size: 12px; color: #555; line-height: 1.5; }
+
+  /* ── ESTRUCTURA ──────────────────────────────────── */
+  .estructura-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .est-step {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+  }
+  .est-num-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 44px;
+    flex-shrink: 0;
+  }
+  .est-circle {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--accent2);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Fraunces', serif;
+    flex-shrink: 0;
+  }
+  .est-line {
+    width: 2px;
+    flex: 1;
+    background: #c84b3130;
+    margin: 4px 0;
+  }
+  .est-step:last-child .est-line { display: none; }
+  .est-content {
+    flex: 1;
+    padding: 4px 0 20px 12px;
+  }
+  .est-name { font-weight: 700; font-size: 13px; color: var(--accent2); }
+  .est-desc { font-size: 12.5px; color: #444; margin-top: 2px; }
+
+  /* ── PRACTICE SECTION ────────────────────────────── */
+  .practica-intro {
+    background: linear-gradient(135deg, #2e7d6b0d, #2e7d6b20);
+    border: 1px solid #2e7d6b30;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 24px;
+    font-size: 13.5px;
+    color: #1a4a40;
+    line-height: 1.6;
+  }
+  .quiz-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .quiz-q {
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    align-items: flex-start;
+  }
+  .quiz-q:hover { background: #faf9f7; }
+  .quiz-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .quiz-num.purple { background: #7b4fcf20; color: var(--accent1); }
+  .quiz-num.red    { background: #c84b3120; color: var(--accent2); }
+  .quiz-num.green  { background: #2e7d6b20; color: var(--accent3); }
+  .quiz-text { font-size: 14px; font-weight: 500; flex: 1; line-height: 1.5; }
+  .quiz-arrow {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+    transition: transform .25s;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .quiz-card.open .quiz-arrow { transform: rotate(180deg); }
+  .quiz-answer {
+    display: none;
+    padding: 0 20px 16px 58px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #333;
+    border-top: 1px solid var(--rule);
+    background: #f7faf9;
+  }
+  .quiz-answer::before {
+    content: '✓ Respuesta: ';
+    font-weight: 700;
+    color: var(--accent3);
+  }
+  .quiz-card.open .quiz-answer { display: block; padding-top: 12px; }
+  .quiz-section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quiz-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── SCORE BAR ────────────────────────────────────── */
+  .score-bar {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .score-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--accent3);
+    line-height: 1;
+  }
+  .score-label { font-size: 12px; color: var(--muted); }
+  .score-track {
+    flex: 1;
+    min-width: 120px;
+    height: 8px;
+    background: var(--rule);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .score-fill {
+    height: 100%;
+    background: var(--accent3);
+    border-radius: 99px;
+    transition: width .5s ease;
+    width: 0%;
+  }
+  .btn-reset {
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: background .2s;
+  }
+  .btn-reset:hover { background: #333; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  .footer {
+    background: var(--ink);
+    color: #ffffff60;
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    margin-top: 64px;
+  }
+  .footer strong { color: #fff; }
+
+  /* ── CHIPS ────────────────────────────────────────── */
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--accent1);
+    color: #fff;
+    border-radius: 99px;
+    padding: 2px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 2px;
+  }
+  .chip.red  { background: var(--accent2); }
+  .chip.gold { background: var(--gold); color: var(--ink); }
+
+  @media(max-width: 600px) {
+    .acc-grid { grid-template-columns: repeat(2, 1fr); }
+    .persona-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">📚 Español — Décimo Año</div>
+  <h1>Resumen para el <span>Examen</span><br>II Período</h1>
+  <p>Material completo basado en tus apuntes: El Verbo y Edipo Rey de Sófocles</p>
+  <div class="hero-meta">
+    <span>📅 Martes 30 de junio</span>
+    <span>📊 Valor: 25%</span>
+    <span>👩‍🏫 Profa. Ileana Ortiz Monge</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a href="#verbo" class="nav-pill active">🔤 El Verbo</a>
+  <a href="#accidentes" class="nav-pill">⚙️ Accidentes</a>
+  <a href="#modo" class="nav-pill">🎭 Modo</a>
+  <a href="#fnp" class="nav-pill">📌 Formas no personales</a>
+  <a href="#edipo" class="nav-pill greek">🏛️ Edipo Rey</a>
+  <a href="#personajes" class="nav-pill greek">👥 Personajes</a>
+  <a href="#estructura" class="nav-pill greek">🏗️ Estructura</a>
+  <a href="#practica" class="nav-pill prac">✏️ Práctica</a>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════
+       PARTE 1: EL VERBO
+  ══════════════════════════════════ -->
+  <div class="section-header" id="verbo">
+    <div class="section-icon icon-purple">🔤</div>
+    <div class="section-title">
+      <small>Parte 1</small>
+      El Verbo
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-purple"></span> Definición</div>
+    <p class="def">El verbo expresa <strong>acciones</strong> (saltar), <strong>estados</strong> (estar), <strong>procesos</strong> (crecer) o <strong>fenómenos naturales</strong> (tronar).</p>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="dot dot-purple"></span> Estructura del Verbo</div>
+    <table>
+      <thead>
+        <tr><th>Parte</th><th>Definición</th><th>Ejemplo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Raíz</strong></td>
+          <td>Contiene el significado básico. Se obtiene al suprimir <em>-ar / -er / -ir</em> del infinitivo.</td>
+          <td>amar → <strong>am-</strong><br>comer → <strong>com-</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Desinencias</strong></td>
+          <td>Terminaciones que se añaden a la raíz. Indican los accidentes gramaticales.</td>
+          <td>bail- + <strong>-aron</strong> = bailaron</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ACCIDENTES -->
+  <div class="section-header" id="accidentes">
+    <div class="section-icon icon-purple">⚙️</div>
+    <div class="section-title">
+      <small>Parte 1 — continuación</small>
+      Accidentes Gramaticales
+    </div>
+  </div>
+
+  <div class="acc-grid">
+    <div class="acc-card purple">
+      <div class="acc-label">Accidente 1</div>
+      <div class="acc-name">Persona</div>
+      <div class="acc-desc">Indica si el sujeto es quien habla, a quien se habla o de quien se habla.</div>
+    </div>
+    <div class="acc-card gold">
+      <div class="acc-label">Accidente 2</div>
+      <div class="acc-name">Número</div>
+      <div class="acc-desc">Denota si la acción verbal es realizada por una (singular) o varias personas (plural).</div>
+    </div>
+    <div class="acc-card red">
+      <div class="acc-label">Accidente 3</div>
+      <div class="acc-name">Tiempo</div>
+      <div class="acc-desc">Expresa el momento en que se realiza la acción: pasado, presente o futuro.</div>
+    </div>
+    <div class="acc-card green">
+      <div class="acc-label">Accidente 4</div>
+      <div class="acc-name">Modo</div>
+      <div class="acc-desc">Muestra la actitud del hablante en relación con la acción verbal.</div>
+    </div>
+  </div>
+
+  <!-- PERSONA -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-purple"></span> Persona</div>
+    <div class="persona-grid">
+      <div class="persona-card p1">
+        <div class="persona-num">Primera persona</div>
+        <div class="persona-name">Quien habla</div>
+        <div class="persona-prons">Yo, nosotros, nosotras</div>
+      </div>
+      <div class="persona-card p2">
+        <div class="persona-num">Segunda persona</div>
+        <div class="persona-name">A quien se habla</div>
+        <div class="persona-prons">Tú, vos, usted, vosotros, vosotras, ustedes</div>
+      </div>
+      <div class="persona-card p3">
+        <div class="persona-num">Tercera persona</div>
+        <div class="persona-name">De quien se habla</div>
+        <div class="persona-prons">Él, ella, ellos, ellas</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div class="card-title" style="margin-bottom:8px;"><span class="dot dot-green"></span> Ejemplos</div>
+      <table>
+        <thead><tr><th>Oración</th><th>Persona</th></tr></thead>
+        <tbody>
+          <tr><td>Hoy <strong>tuve</strong> un mal día de trabajo.</td><td><span class="chip">1ª singular</span></td></tr>
+          <tr><td><strong>Tuvimos</strong> buenos momentos.</td><td><span class="chip">1ª plural</span></td></tr>
+          <tr><td>Te <strong>reirás</strong> conmigo hoy.</td><td><span class="chip gold">2ª singular</span></td></tr>
+          <tr><td>¿Ustedes <strong>comen</strong> carne?</td><td><span class="chip gold">2ª plural</span></td></tr>
+          <tr><td>Erika <strong>confesaba</strong> la verdad.</td><td><span class="chip red">3ª singular</span></td></tr>
+          <tr><td>Juan y Carmen <strong>llegaron</strong> tarde.</td><td><span class="chip red">3ª plural</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NÚMERO -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-gold"></span> Número</div>
+    <table>
+      <thead><tr><th>Número</th><th>Descripción</th><th>Pronombres</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Singular</strong></td>
+          <td>Acción realizada por una sola persona.</td>
+          <td>Yo, tú, vos, usted, él, ella</td>
+        </tr>
+        <tr>
+          <td><strong>Plural</strong></td>
+          <td>Acción realizada por varias personas.</td>
+          <td>Nosotros, vosotros, ustedes, ellos, ellas</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="examples-row">
+      <span class="ex-pill">Hoy <u>tuve</u> un mal día <span class="tag">singular</span></span>
+      <span class="ex-pill">Te <u>reirás</u> conmigo hoy <span class="tag">singular</span></span>
+      <span class="ex-pill"><u>Tuvimos</u> buenos momentos <span class="tag">plural</span></span>
+      <span class="ex-pill">¿Ustedes <u>comen</u> carne? <span class="tag">plural</span></span>
+    </div>
+  </div>
+
+  <!-- TIEMPO -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span> Tiempo</div>
+    <table>
+      <thead><tr><th>Tiempo</th><th>Descripción</th><th>Ejemplos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Pretérito</strong></td>
+          <td>Pasó antes de que se habla.</td>
+          <td>amé, amaba, comí, comía, viví, vivía</td>
+        </tr>
+        <tr>
+          <td><strong>Presente</strong></td>
+          <td>Ocurre en el mismo instante en que se habla.</td>
+          <td>amo, como, vivo</td>
+        </tr>
+        <tr>
+          <td><strong>Futuro</strong></td>
+          <td>Aún no ha sucedido.</td>
+          <td>amaré, comeré, viviré</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="examples-row">
+      <span class="ex-pill">Hoy <u>tuve</u> un mal día → Pretérito <span class="tag">pasado</span></span>
+      <span class="ex-pill">Erika <u>confiesa</u> la verdad → Presente <span class="tag">ahora</span></span>
+      <span class="ex-pill">Te <u>reirás</u> conmigo hoy → Futuro <span class="tag">después</span></span>
+    </div>
+  </div>
+
+  <!-- MODO -->
+  <div class="section-header" id="modo">
+    <div class="section-icon icon-purple">🎭</div>
+    <div class="section-title">
+      <small>Parte 1 — accidente 4</small>
+      Modo Verbal
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="def" style="margin-bottom:14px;">Muestra la <strong>actitud del hablante</strong> en relación con la acción verbal.</div>
+    <div class="modo-grid">
+      <div class="modo-card ind">
+        <div class="modo-name">Indicativo</div>
+        <div class="modo-def">Si la percibe como real, aunque no se ha efectuado.</div>
+        <div class="modo-ex">Aníbal come pan con mermelada.</div>
+      </div>
+      <div class="modo-card sub">
+        <div class="modo-name">Subjuntivo</div>
+        <div class="modo-def">Como una posibilidad.</div>
+        <div class="modo-ex">No creo que te comas este pan.</div>
+      </div>
+      <div class="modo-card imp">
+        <div class="modo-name">Imperativo</div>
+        <div class="modo-def">Como una orden o exhortación.</div>
+        <div class="modo-ex">Come este pan con mermelada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAS NO PERSONALES -->
+  <div class="section-header" id="fnp">
+    <div class="section-icon icon-purple">📌</div>
+    <div class="section-title">
+      <small>Parte 1</small>
+      Formas No Personales del Verbo
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="def" style="margin-bottom:16px;">No tienen persona, número, tiempo ni modo propios. Son: <strong>Infinitivo, Participio y Gerundio</strong>.</div>
+    <div class="fnp-grid">
+      <div class="fnp-card">
+        <div class="fnp-name">Infinitivo</div>
+        <div class="fnp-term">-ar &nbsp;·&nbsp; -er &nbsp;·&nbsp; -ir</div>
+        <div class="fnp-desc">Se identifica con el nombre del verbo.</div>
+        <div class="fnp-ex">Mi deseo es <u>ganar</u>.</div>
+      </div>
+      <div class="fnp-card">
+        <div class="fnp-name">Participio</div>
+        <div class="fnp-term">-ado · -ido · -to · -so · -cho</div>
+        <div class="fnp-desc">Se usa con mayor frecuencia. Puede funcionar como adjetivo.</div>
+        <div class="fnp-ex">El abuelo fue <u>visitado</u> por sus nietos.</div>
+      </div>
+      <div class="fnp-card">
+        <div class="fnp-name">Gerundio</div>
+        <div class="fnp-term">-ando · -endo · -iendo</div>
+        <div class="fnp-desc">Da la idea de una acción en proceso.</div>
+        <div class="fnp-ex">Estoy <u>pensando</u> en ti.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════
+       PARTE 2: EDIPO REY
+  ══════════════════════════════════ -->
+  <div class="section-header" id="edipo">
+    <div class="section-icon icon-red">🏛️</div>
+    <div class="section-title">
+      <small>Parte 2</small>
+      Edipo Rey, de Sófocles
+    </div>
+  </div>
+
+  <!-- AUTOR -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span> El Autor</div>
+    <table>
+      <thead><tr><th>Dato</th><th>Información</th></tr></thead>
+      <tbody>
+        <tr><td>Nombre</td><td><strong>Sófocles</strong></td></tr>
+        <tr><td>Nacimiento</td><td>496 a.C. en Colono (hoy parte de Atenas)</td></tr>
+        <tr><td>Muerte</td><td>406 a.C.</td></tr>
+        <tr><td>Período</td><td><strong>Edad Clásica / Edad de Oro</strong> (480–323 a.C.)</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:13px;color:var(--muted);margin-top:8px;">
+      📜 Período en que se cultivaron: tragedia, comedia, poesía lírica y prosa narrativa. Encuadra el apogeo de la grandeza del arte griego.
+    </div>
+  </div>
+
+  <!-- GÉNERO -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span> Género Literario: Drama / Teatro</div>
+    <ul style="list-style:none;padding:0;font-size:13.5px;line-height:2;">
+      <li>📌 Predominan el <strong>diálogo</strong> y las situaciones dramáticas.</li>
+      <li>📌 Puede estar estructurado en escenas, actos y cuadros.</li>
+      <li>📌 Se necesita escenografía: mobiliario, luces, vestuario, música.</li>
+      <li>📌 <strong>No existe narrador</strong> — las acciones son representadas por actores.</li>
+      <li>📌 El dramaturgo representa al autor.</li>
+    </ul>
+
+    <div style="margin-top:16px;">
+      <div class="card-title"><span class="dot dot-red"></span> Subgénero: Tragedia</div>
+      <ul style="list-style:none;padding:0;font-size:13.5px;line-height:2;">
+        <li>🎭 Surgen <strong>personajes heroicos</strong>.</li>
+        <li>🎭 Estilo y lenguaje depurados.</li>
+        <li>🎭 Búsqueda de la <strong>justicia divina</strong>.</li>
+        <li>🎭 Por lo general, presenta un <strong>final doloroso</strong>.</li>
+        <li>🎭 El héroe está <strong>predestinado</strong> a sufrir situaciones inimaginables.</li>
+        <li>🎭 El protagonista comete errores y paga un alto precio (castigo y muerte).</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="card-title"><span class="dot dot-red"></span> Características propias de Sófocles</div>
+      <ul style="list-style:none;padding:0;font-size:13.5px;line-height:2;">
+        <li>⚡ Los personajes son humanos.</li>
+        <li>⚡ Introduce el <strong>tercer personaje o tritagonista</strong> (máx. 3 actores con máscaras).</li>
+        <li>⚡ Aumentó a <strong>cinco los integrantes del coro</strong> (corentas).</li>
+        <li>⚡ El coro pasa a un segundo plano; da explicaciones secundarias.</li>
+        <li>⚡ Las causas de las acciones están impuestas por un <strong>determinismo sobrehumano</strong>.</li>
+        <li>⚡ Sus personajes son perseguidos por el <strong>destino o el hado</strong>.</li>
+        <li>⚡ Profundiza en la <strong>psicología de los personajes</strong>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ARGUMENTO -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span> Argumento — Acontencimientos Destacados</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Peste en Tebas</div>
+        <div class="tl-text">Edipo, rey de Tebas, pide remedio a la plaga que azota la ciudad. Envía a Creonte al oráculo de Delfos para saber el origen de la peste.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Predicciones de Tiresias</div>
+        <div class="tl-text">Llega Tiresias y produce un diálogo que degenera en enfrentamiento. El adivino dice que Edipo está directamente implicado en el asesinato de Layo.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Acusaciones contra Creonte</div>
+        <div class="tl-text">Creonte se indigna ante las acusaciones de conspiración para usurpar el trono que le ha hecho Edipo.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Revelaciones de Yocasta</div>
+        <div class="tl-text">Yocasta ejerce de mediadora. Pone como ejemplo un oráculo que predijo que Layo moriría asesinado por uno de sus hijos.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Edipo cuenta su historia</div>
+        <div class="tl-text">Edipo relata a Yocasta sobre sus padres adoptivos: Pólibo y Mérope, reyes de Corinto.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Noticias de Corinto</div>
+        <div class="tl-text">Un mensajero trae noticias sobre los supuestos padres de Edipo. Yocasta trata de convencer a Edipo de que el oráculo (matar a su padre y casarse con su madre) no se cumpliría.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-title">Resolución de los enigmas</div>
+        <div class="tl-text">Edipo comprende que Yocasta y Layo eran sus verdaderos padres y que todos los oráculos se han cumplido. Un mensajero cuenta el suicidio de Yocasta y cómo Edipo queda ciego.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEMAS -->
+  <div class="card">
+    <div class="card-title"><span class="dot dot-red"></span> Tema Principal</div>
+    <div class="tema-main">
+      La <strong>fuerza del destino</strong>, que se cumple inexorablemente, aunque el protagonista intente impedirlo al huir de sus padres, sin saber que eran adoptivos.
+    </div>
+    <div class="card-title" style="margin-top:16px;"><span class="dot dot-red"></span> Subtemas</div>
+    <div class="subtemas-grid">
+      <div class="subtema-card">
+        <div class="subtema-icon">💔</div>
+        <div class="subtema-title">El incesto</div>
+        <div class="subtema-text">Yocasta y Edipo mantienen una relación amorosa sin saber que son madre e hijo.</div>
+      </div>
+      <div class="subtema-card">
+        <div class="subtema-icon">⚔️</div>
+        <div class="subtema-title">El parricidio</div>
+        <div class="subtema-text">Edipo mata a su verdadero padre sin saber que era su progenitor.</div>
+      </div>
+      <div class="subtema-card">
+        <div class="subtema-icon">👶</div>
+        <div class="subtema-title">El niño abandonado</div>
+        <div class="subtema-text">Edipo fue entregado a un pastor para evitar que se cumpliera la profecía.</div>
+      </div>
+      <div class="subtema-card">
+        <div class="subtema-icon">😢</div>
+        <div class="subtema-title">La autoagresión</div>
+        <div class="subtema-text">Edipo, al enterarse de su error, se daña sus propios ojos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PERSONAJES -->
+  <div class="section-header" id="personajes">
+    <div class="section-icon icon-red">👥</div>
+    <div class="section-title">
+      <small>Parte 2</small>
+      Personajes
+    </div>
+  </div>
+
+  <div style="margin-bottom:12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">Personajes principales</div>
+  <div class="personaje-card">
+    <div class="p-avatar">👑</div>
+    <div>
+      <div class="p-name">Edipo</div>
+      <span class="p-badge badge-main">Principal</span>
+      <div class="p-desc">Rey de Tebas. Se rebela contra su destino. Representa al ser humano que trata de superar su suerte.</div>
+    </div>
+  </div>
+  <div class="personaje-card">
+    <div class="p-avatar">👸</div>
+    <div>
+      <div class="p-name">Yocasta</div>
+      <span class="p-badge badge-main">Principal</span>
+      <div class="p-desc">Reina de Tebas. Fue madre y esposa de Edipo sin saberlo. Se suicida al descubrir la verdad.</div>
+    </div>
+  </div>
+  <div class="personaje-card">
+    <div class="p-avatar">🛡️</div>
+    <div>
+      <div class="p-name">Creonte</div>
+      <span class="p-badge badge-main">Principal</span>
+      <div class="p-desc">Hermano de Yocasta. Queda a cargo de las hijas y del trono cuando Edipo se va.</div>
+    </div>
+  </div>
+  <div class="personaje-card">
+    <div class="p-avatar">🔮</div>
+    <div>
+      <div class="p-name">Tiresias</div>
+      <span class="p-badge badge-main">Principal</span>
+      <div class="p-desc">Vidente y adivino. Presagia la muerte del rey Layo. Revela que Edipo es el verdadero asesino de Layo.</div>
+    </div>
+  </div>
+
+  <div style="margin:16px 0 12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">Personajes secundarios</div>
+  <div class="personaje-card">
+    <div class="p-avatar">🎭</div>
+    <div>
+      <div class="p-name">Coro de ancianos tebanos</div>
+      <span class="p-badge badge-sec">Secundario</span>
+      <div class="p-desc">Personaje colectivo. Representa la ciudadanía tebana. Interviene alternando con las acciones.</div>
+    </div>
+  </div>
+  <div class="personaje-card">
+    <div class="p-avatar">⛪</div>
+    <div>
+      <div class="p-name">Sacerdote / Paje</div>
+      <span class="p-badge badge-sec">Secundario</span>
+      <div class="p-desc">Ministro de un dios; trabajador de los últimos servidores del difunto rey Layo.</div>
+    </div>
+  </div>
+
+  <div style="margin:16px 0 12px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);">Personajes referenciales (no presentes)</div>
+  <div class="personaje-card">
+    <div class="p-avatar">⚰️</div>
+    <div>
+      <div class="p-name">Layo</div>
+      <span class="p-badge badge-ref">Referencial</span>
+      <div class="p-desc">Rey de Tebas, padre verdadero de Edipo. Fue asesinado por su propio hijo.</div>
+    </div>
+  </div>
+  <div class="personaje-card">
+    <div class="p-avatar">👨‍👩‍👦</div>
+    <div>
+      <div class="p-name">Pólibo y Mérope</div>
+      <span class="p-badge badge-ref">Referencial</span>
+      <div class="p-desc">Reyes de Corinto y padres adoptivos de Edipo.</div>
+    </div>
+  </div>
+
+  <!-- ESTRUCTURA -->
+  <div class="section-header" id="estructura">
+    <div class="section-icon icon-red">🏗️</div>
+    <div class="section-title">
+      <small>Parte 2</small>
+      Estructura de la Obra
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="def" style="margin-bottom:18px;">
+      Edipo Rey es una obra dramática con un <strong>solo acto</strong>, ya que todo se desarrolla en una <strong>unidad de tiempo</strong>.
+    </div>
+    <div class="estructura-steps">
+      <div class="est-step">
+        <div class="est-num-col">
+          <div class="est-circle">1</div>
+          <div class="est-line"></div>
+        </div>
+        <div class="est-content">
+          <div class="est-name">Prólogo</div>
+          <div class="est-desc">Breve exposición del tema con un diálogo o discurso.</div>
+        </div>
+      </div>
+      <div class="est-step">
+        <div class="est-num-col">
+          <div class="est-circle">2</div>
+          <div class="est-line"></div>
+        </div>
+        <div class="est-content">
+          <div class="est-name">Párodos</div>
+          <div class="est-desc">Entrada del coro.</div>
+        </div>
+      </div>
+      <div class="est-step">
+        <div class="est-num-col">
+          <div class="est-circle">3</div>
+          <div class="est-line"></div>
+        </div>
+        <div class="est-content">
+          <div class="est-name">Episodio</div>
+          <div class="est-desc">Acto principal de la obra.</div>
+        </div>
+      </div>
+      <div class="est-step">
+        <div class="est-num-col">
+          <div class="est-circle">4</div>
+          <div class="est-line"></div>
+        </div>
+        <div class="est-content">
+          <div class="est-name">Estásimos</div>
+          <div class="est-desc">Canto lírico y danza del coro: estrofa, antiestrofa y épodo. La antiestrofa es la segunda parte y el épodo es la tercera del canto lírico.</div>
+        </div>
+      </div>
+      <div class="est-step">
+        <div class="est-num-col">
+          <div class="est-circle">5</div>
+        </div>
+        <div class="est-content">
+          <div class="est-name">Éxodo</div>
+          <div class="est-desc">Salida del coro.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- ══════════════════════════════════
+       PRÁCTICA PARA EL EXAMEN
+  ══════════════════════════════════ -->
+  <div class="section-header" id="practica">
+    <div class="section-icon icon-green">✏️</div>
+    <div class="section-title">
+      <small>Práctica</small>
+      Preguntas de Examen
+    </div>
+  </div>
+
+  <div class="practica-intro">
+    💡 Toca cada pregunta para revelar la respuesta. Practica responder primero antes de ver la solución. El marcador se actualiza automáticamente.
+  </div>
+
+  <!-- SCORE -->
+  <div class="score-bar">
+    <div>
+      <div class="score-num" id="scoreNum">0</div>
+      <div class="score-label">reveladas de <span id="totalNum">20</span></div>
+    </div>
+    <div style="flex:1">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:6px;">Progreso</div>
+      <div class="score-track"><div class="score-fill" id="scoreFill"></div></div>
+    </div>
+    <button class="btn-reset" onclick="resetQuiz()">↺ Reiniciar</button>
+  </div>
+
+  <!-- SECCIÓN A: VERBO -->
+  <div class="quiz-section-label">
+    <span class="dot dot-purple"></span> Sección A — El Verbo
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">1</div>
+      <div class="quiz-text">¿Qué expresa el verbo? Da tres ejemplos de tipos de verbos.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">El verbo expresa acciones (saltar), estados (estar), procesos (crecer) o fenómenos naturales (tronar).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">2</div>
+      <div class="quiz-text">¿Cuáles son las dos partes que forman el verbo? Explica cada una.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">La Raíz (contiene el significado básico; se obtiene suprimiendo -ar/-er/-ir) y las Desinencias (terminaciones que indican los accidentes gramaticales). Ej: bail- + -aron.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">3</div>
+      <div class="quiz-text">Identifica el MODO verbal: "No creo que te comas este pan."</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Modo Subjuntivo — expresa posibilidad o duda sobre la acción.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">4</div>
+      <div class="quiz-text">Escribe las tres formas no personales del verbo con sus terminaciones.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Infinitivo (-ar, -er, -ir) | Participio (-ado, -ido, -to, -so, -cho) | Gerundio (-ando, -endo, -iendo).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">5</div>
+      <div class="quiz-text">¿Qué forma no personal es "visitado" en "El abuelo fue visitado por sus nietos"? ¿Cómo la identificas?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Es un Participio. Se identifica porque termina en -ado y funciona como adjetivo dentro de la oración.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">6</div>
+      <div class="quiz-text">Identifica PERSONA y NÚMERO del verbo subrayado: "Tuvimos buenos momentos."</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Primera persona plural (nosotros).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">7</div>
+      <div class="quiz-text">Clasifica según el TIEMPO verbal: amaré / comía / vivo</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">amaré = Futuro | comía = Pretérito (imperfecto) | vivo = Presente.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num purple">8</div>
+      <div class="quiz-text">Escribe una oración en modo IMPERATIVO e identifica el verbo.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Ej: "Come este pan con mermelada." → Come = modo imperativo (orden).</div>
+  </div>
+
+  <!-- SECCIÓN B: EDIPO -->
+  <div class="quiz-section-label">
+    <span class="dot dot-red"></span> Sección B — Edipo Rey
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">9</div>
+      <div class="quiz-text">¿Cuál es el tema principal de Edipo Rey?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">La fuerza del destino, que se cumple inexorablemente aunque el protagonista intente impedirlo al huir de sus padres, sin saber que eran adoptivos.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">10</div>
+      <div class="quiz-text">¿Quién era Tiresias y qué papel cumplía en la obra?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Era un vidente y adivino robusto. Presagiaba la muerte del rey Layo y reveló que Edipo era el verdadero asesino de Layo.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">11</div>
+      <div class="quiz-text">Menciona tres características propias de la tragedia como subgénero.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">1) Surgen personajes heroicos. 2) Presenta un final doloroso. 3) El héroe está predestinado a sufrir situaciones inimaginables. (también: búsqueda de justicia divina, lenguaje depurado, el protagonista paga un alto precio).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">12</div>
+      <div class="quiz-text">¿Cuáles son los cinco elementos de la estructura de Edipo Rey?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">1) Prólogo 2) Párodos (entrada del coro) 3) Episodio (acto) 4) Estásimos (canto lírico: estrofa, antiestrofa y épodo) 5) Éxodo (salida del coro).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">13</div>
+      <div class="quiz-text">¿Qué período literario corresponde a Sófocles y qué géneros se cultivaron?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Edad Clásica (Edad de Oro) 480-323 a.C. Se cultivaron: tragedia, comedia, poesía lírica y prosa narrativa.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">14</div>
+      <div class="quiz-text">¿Cuáles son los cuatro subtemas de Edipo Rey?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">El incesto, el parricidio, el niño abandonado y la autoagresión.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">15</div>
+      <div class="quiz-text">¿Qué le ocurre a Yocasta y a Edipo al final de la obra?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Yocasta se suicida al descubrir que estaba casada con su propio hijo. Edipo, al enterarse de la verdad, se daña sus propios ojos (queda ciego).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num red">16</div>
+      <div class="quiz-text">¿Cuántos actores máximos había en las obras de Sófocles y cómo diferenciaban personajes?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Máximo tres actores (incluyendo el tritagonista), cada uno podía representar varios personajes mediante el uso de máscaras.</div>
+  </div>
+
+  <!-- SECCIÓN C: INTEGRADA -->
+  <div class="quiz-section-label">
+    <span class="dot dot-green"></span> Sección C — Análisis Integrado
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num green">17</div>
+      <div class="quiz-text">Identifica TIEMPO y MODO del verbo en: "Yocasta confesaba la verdad."</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">Tiempo: Pretérito (imperfecto) — pasó antes de que se habla. Modo: Indicativo — se percibe como real.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num green">18</div>
+      <div class="quiz-text">En el texto de Edipo Rey, ¿cómo se identifica el punto de vista de la época clásica?</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">La obra refleja los valores del período clásico griego: el determinismo del destino, la búsqueda de la justicia divina y la inevitabilidad de las profecías.</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num green">19</div>
+      <div class="quiz-text">¿Cuál es la diferencia entre la raíz y las desinencias del verbo? Ejemplo con "bailaron".</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">La raíz "bail-" contiene el significado básico. Las desinencias "-aron" son terminaciones que indican los accidentes gramaticales (3ª persona, plural, pretérito, indicativo).</div>
+  </div>
+
+  <div class="quiz-card" onclick="toggleQuiz(this)">
+    <div class="quiz-q">
+      <div class="quiz-num green">20</div>
+      <div class="quiz-text">Menciona dos características del drama/teatro que lo diferencian de otros géneros literarios.</div>
+      <div class="quiz-arrow">▼</div>
+    </div>
+    <div class="quiz-answer">1) No existe narrador — las acciones son representadas por actores ante un público. 2) Predominan el diálogo y las situaciones dramáticas (no la narración ni la descripción).</div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Resumen para Examen de Español</strong> — Décimo Año · II Período<br>
+  Basado en material de clase con la Profa. Ileana Ortiz Monge · Valor 25%
+</div>
+
+<script>
+  let opened = new Set();
+
+  function toggleQuiz(card) {
+    const isOpen = card.classList.contains('open');
+    if (!isOpen) {
+      card.classList.add('open');
+      const idx = [...document.querySelectorAll('.quiz-card')].indexOf(card);
+      opened.add(idx);
+    } else {
+      card.classList.remove('open');
+    }
+    updateScore();
+  }
+
+  function updateScore() {
+    const total = document.querySelectorAll('.quiz-card').length;
+    const count = opened.size;
+    document.getElementById('scoreNum').textContent = count;
+    document.getElementById('totalNum').textContent = total;
+    document.getElementById('scoreFill').style.width = (count / total * 100) + '%';
+  }
+
+  function resetQuiz() {
+    opened.clear();
+    document.querySelectorAll('.quiz-card').forEach(c => c.classList.remove('open'));
+    updateScore();
+  }
+
+  // Smooth highlight active nav
+  const sections = document.querySelectorAll('[id]');
+  const pills = document.querySelectorAll('.nav-pill');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        pills.forEach(p => {
+          p.classList.toggle('active', p.getAttribute('href') === '#' + e.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
